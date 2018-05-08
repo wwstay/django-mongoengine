@@ -89,6 +89,9 @@ class BaseQuerySet(object):
                 pass
             six.reraise(*exc_info)
 
+    def values(self, *fields, **kwargs):
+        return self.only(*fields).as_pymongo()
+
 
 class QuerySet(BaseQuerySet, qs.QuerySet):
     pass

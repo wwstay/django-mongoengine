@@ -58,7 +58,10 @@ class DjangoField(object):
             # Fields with choices get special treatment.
             include_blank = (self.blank or
                              not (self.default or 'initial' in kwargs))
-            defaults['choices'] = self.get_choices(include_blank=include_blank)
+            try:
+                defaults['choices'] = self.get_choices(include_blank=include_blank)
+            except:
+                defaults['choices'] = []
             defaults['coerce'] = self.to_python
             if self.null:
                 defaults['empty_value'] = None
